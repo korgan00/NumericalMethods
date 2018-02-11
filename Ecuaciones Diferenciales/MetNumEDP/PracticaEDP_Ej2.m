@@ -75,3 +75,28 @@ printf("Temperatura "); maxima = max(u1)
 printf("Error "); cometido = max(u1) - uex(x1(find(max(u1) == u1)))
 
 
+tol = 10^-3;
+nmax = 1000;
+x0_1 = 0;
+x0_2 = 2;
+df = @(x) (1/alpha) * (((1/2) .* x^2) - (2 .* x) +  (4/3));
+
+printf("NEWTON\n");
+
+[zero1, res, niter1] = newton(@(x)(uex(x) - 75), df, x0_1, tol, nmax);
+[zero2, res, niter2] = newton(@(x)(uex(x) - 75), df, x0_2, tol, nmax);
+
+printf("Hay mas de 75 grados en el "); intervaloNewton = [zero1 zero2]
+
+
+phi = @(x) x - (uex(x) - 75)/ df(x);
+[xN1, niterN1] = puntofijo2(phi, x0_1, tol, nmax);
+[xN2, niterN2] = puntofijo2(phi, x0_2, tol, nmax);
+
+printf("Hay mas de 75 grados en el "); intervaloPuntoFijo = [xN1 xN2]
+
+
+diferenciaPrecision = intervaloNewton - intervaloPuntoFijo
+diferenciaIteraciones = [niter1 niter2] - [niterN1 niterN2]
+
+%Exacta
